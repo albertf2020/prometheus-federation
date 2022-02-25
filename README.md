@@ -30,8 +30,6 @@ DataCenter: Global:
 * Prometheus3-[192.168.50.25], Grafana-[192.168.50.25]
 
 ***
-
-```
 **Data Flow:**
 
 The Prometheus1 and Prometheus2 servers scrapes targets
@@ -41,6 +39,7 @@ Prometheus3 (Global Datacenter) scrape selected time series (job: mysql_exporter
 IMPORTANT: Prometheus3 collects only SELECTED METRICS - in this case MYSQL. The rest - like Prometheus, Node are not downloaded). 
 This is Hierarchical federation which allows Prometheus to scale to environments with tens of data centers and millions of nodes. In this use case, the federation topology resembles a tree, with higher-level Prometheus servers collecting aggregated time series data from a larger number of subordinated servers.
 
+***
 **Example in practice:**
 
 Below is a drawing showing mysql dashboard (grafan server - data from prometheus1: 192.168.50.3000)
@@ -50,7 +49,7 @@ Below is a drawing showing mysql dashboard (grafan server - data from prometheus
 and now - dashboard Global-mysql from prometheus3 (Grtafana: 192.168.50.25:3000) which presents SPECIFIC, SELECTED metrics from both servers - in this case, to compare the size of the ANALIZA table
 
 ![alt text](images/prometheus-global.png)
-
+***
 Author and more detail show of this page https://itandrehoch.github.io/Prometheus-federation/
 
         
