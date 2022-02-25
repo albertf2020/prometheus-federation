@@ -1,0 +1,576 @@
+Bringing machine 'mysql1' up with 'virtualbox' provider...
+Bringing machine 'prometheus1' up with 'virtualbox' provider...
+Bringing machine 'mysql2' up with 'virtualbox' provider...
+Bringing machine 'prometheus2' up with 'virtualbox' provider...
+Bringing machine 'prometheus3' up with 'virtualbox' provider...
+==> mysql1: Importing base box 'centos/7'...
+[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> mysql1: Matching MAC address for NAT networking...
+==> mysql1: Checking if box 'centos/7' version '2004.01' is up to date...
+==> mysql1: Setting the name of the VM: mysql1
+==> mysql1: Clearing any previously set network interfaces...
+==> mysql1: Preparing network interfaces based on configuration...
+    mysql1: Adapter 1: nat
+    mysql1: Adapter 2: hostonly
+==> mysql1: Forwarding ports...
+    mysql1: 22 (guest) => 2222 (host) (adapter 1)
+==> mysql1: Booting VM...
+==> mysql1: Waiting for machine to boot. This may take a few minutes...
+    mysql1: SSH address: 127.0.0.1:2222
+    mysql1: SSH username: vagrant
+    mysql1: SSH auth method: private key
+    mysql1: 
+    mysql1: Vagrant insecure key detected. Vagrant will automatically replace
+    mysql1: this with a newly generated keypair for better security.
+    mysql1: 
+    mysql1: Inserting generated public key within guest...
+    mysql1: Removing insecure key from the guest if it's present...
+    mysql1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> mysql1: Machine booted and ready!
+==> mysql1: Checking for guest additions in VM...
+    mysql1: No guest additions were detected on the base box for this VM! Guest
+    mysql1: additions are required for forwarded ports, shared folders, host only
+    mysql1: networking, and more. If SSH fails on this machine, please install
+    mysql1: the guest additions and repackage the box to continue.
+    mysql1: 
+    mysql1: This is not an error message; everything may continue to work properly,
+    mysql1: in which case you may ignore this message.
+==> mysql1: Setting hostname...
+==> mysql1: Configuring and enabling network interfaces...
+==> mysql1: Rsyncing folder: /root/prometheus-federation/ => /vagrant
+==> mysql1: Running provisioner: ansible_local...
+    mysql1: Installing Ansible...
+    mysql1: Running ansible-playbook...
+
+PLAY [mysql1] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mysql1]
+
+TASK [mysql1 : Update system] **************************************************
+changed: [mysql1]
+
+TASK [mysql1 : Add MySql  repository] ******************************************
+changed: [mysql1]
+
+TASK [mysql1 : Add Prometheus repository] **************************************
+changed: [mysql1]
+
+TASK [mysql1 : Installation Node_exporter] *************************************
+changed: [mysql1]
+
+TASK [mysql1 : Installation mysql and MySQL-python] ****************************
+changed: [mysql1]
+
+TASK [mysql1 : Starting services like node_exporter] ***************************
+changed: [mysql1] => (item=node_exporter)
+
+TASK [mysql1 : Starting service MYSQL] *****************************************
+changed: [mysql1] => (item=mysqld)
+
+TASK [mysql1 : capture password from mysql log] ********************************
+changed: [mysql1]
+
+TASK [mysql1 : debug] **********************************************************
+ok: [mysql1] => {
+    "msg": "haslo to  bW=Q25Yq>Vn)"
+}
+
+TASK [mysql1 : Set new password for user Root] *********************************
+changed: [mysql1]
+
+TASK [mysql1 : Copy sql.sh  file] **********************************************
+changed: [mysql1]
+
+TASK [mysql1 : Copy query.sql file] ********************************************
+changed: [mysql1]
+
+TASK [mysql1 : Copy table.sql file] ********************************************
+changed: [mysql1]
+
+TASK [mysql1 : Creating database and tables] ***********************************
+changed: [mysql1]
+
+TASK [mysql1 : Creating entry for mysql query] *********************************
+changed: [mysql1]
+
+TASK [mysql1 : Installation mysqld_exporter] ***********************************
+changed: [mysql1]
+
+TASK [mysql1 : Enable service mysqld_exporter] *********************************
+changed: [mysql1]
+
+TASK [mysql1 : Copy systemd service file for mysqld_exporter] ******************
+changed: [mysql1]
+
+TASK [mysql1 : Enable service mysqld_exporter] *********************************
+changed: [mysql1]
+
+TASK [mysql1 : Creating home directory] ****************************************
+changed: [mysql1]
+
+TASK [mysql1 : Add users] ******************************************************
+changed: [mysql1]
+
+TASK [mysql1 : Add albert to sudoers] ******************************************
+changed: [mysql1]
+
+TASK [mysql1 : Creating vagrant files directory] *******************************
+changed: [mysql1]
+
+RUNNING HANDLER [mysql1 : yum-clean-metadata] **********************************
+changed: [mysql1]
+
+PLAY RECAP *********************************************************************
+mysql1                     : ok=25   changed=23   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> prometheus1: Importing base box 'centos/7'...
+[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> prometheus1: Matching MAC address for NAT networking...
+==> prometheus1: Checking if box 'centos/7' version '2004.01' is up to date...
+==> prometheus1: Setting the name of the VM: Prometheus1
+==> prometheus1: Fixed port collision for 22 => 2222. Now on port 2200.
+==> prometheus1: Clearing any previously set network interfaces...
+==> prometheus1: Preparing network interfaces based on configuration...
+    prometheus1: Adapter 1: nat
+    prometheus1: Adapter 2: hostonly
+==> prometheus1: Forwarding ports...
+    prometheus1: 22 (guest) => 2200 (host) (adapter 1)
+==> prometheus1: Booting VM...
+==> prometheus1: Waiting for machine to boot. This may take a few minutes...
+    prometheus1: SSH address: 127.0.0.1:2200
+    prometheus1: SSH username: vagrant
+    prometheus1: SSH auth method: private key
+    prometheus1: 
+    prometheus1: Vagrant insecure key detected. Vagrant will automatically replace
+    prometheus1: this with a newly generated keypair for better security.
+    prometheus1: 
+    prometheus1: Inserting generated public key within guest...
+    prometheus1: Removing insecure key from the guest if it's present...
+    prometheus1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> prometheus1: Machine booted and ready!
+==> prometheus1: Checking for guest additions in VM...
+    prometheus1: No guest additions were detected on the base box for this VM! Guest
+    prometheus1: additions are required for forwarded ports, shared folders, host only
+    prometheus1: networking, and more. If SSH fails on this machine, please install
+    prometheus1: the guest additions and repackage the box to continue.
+    prometheus1: 
+    prometheus1: This is not an error message; everything may continue to work properly,
+    prometheus1: in which case you may ignore this message.
+==> prometheus1: Setting hostname...
+==> prometheus1: Configuring and enabling network interfaces...
+==> prometheus1: Rsyncing folder: /root/prometheus-federation/ => /vagrant
+==> prometheus1: Running provisioner: ansible_local...
+    prometheus1: Installing Ansible...
+    prometheus1: Running ansible-playbook...
+
+PLAY [prometheus1] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [prometheus1]
+
+TASK [prometheus1 : Update system] *********************************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Installation multiple packages] ****************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Add Prometheus repository] *********************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Add Grafana repository] ************************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Installation Prometheus, Node_exporter, Grafana] ***********
+changed: [prometheus1]
+
+TASK [prometheus1 : Inserting cofiguration for prometheus] *********************
+changed: [prometheus1]
+
+TASK [prometheus1 : Starting services Prometheus, node_exporter, grafana] ******
+[WARNING]: Both option path and its alias dest are set.
+changed: [prometheus1] => (item=prometheus)
+changed: [prometheus1] => (item=node_exporter)
+changed: [prometheus1] => (item=grafana-server)
+
+TASK [prometheus1 : Enabling ssh connection via passwd] ************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Creating home directory] ***********************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Add users] *************************************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Authorized keys] *******************************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Add albert to sudoers] *************************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Creating vagrant files directory] **************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Grafana - copy DATASOURCE YAML] ****************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Creating Grafana Dashboard Dir] ****************************
+changed: [prometheus1]
+
+TASK [prometheus1 : Grafana - dasboard Provisioning file] **********************
+changed: [prometheus1]
+
+TASK [prometheus1 : Grafana - copy MySql dashbord JSON file] *******************
+changed: [prometheus1]
+
+RUNNING HANDLER [prometheus1 : yum-clean-metadata] *****************************
+changed: [prometheus1]
+
+RUNNING HANDLER [prometheus1 : reload-ssh] *************************************
+changed: [prometheus1]
+
+RUNNING HANDLER [prometheus1 : reload-grafana] *********************************
+changed: [prometheus1]
+
+PLAY RECAP *********************************************************************
+prometheus1                : ok=21   changed=20   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> mysql2: Importing base box 'centos/7'...
+[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> mysql2: Matching MAC address for NAT networking...
+==> mysql2: Checking if box 'centos/7' version '2004.01' is up to date...
+==> mysql2: Setting the name of the VM: mysql2
+==> mysql2: Fixed port collision for 22 => 2222. Now on port 2201.
+==> mysql2: Clearing any previously set network interfaces...
+==> mysql2: Preparing network interfaces based on configuration...
+    mysql2: Adapter 1: nat
+    mysql2: Adapter 2: hostonly
+==> mysql2: Forwarding ports...
+    mysql2: 22 (guest) => 2201 (host) (adapter 1)
+==> mysql2: Booting VM...
+==> mysql2: Waiting for machine to boot. This may take a few minutes...
+    mysql2: SSH address: 127.0.0.1:2201
+    mysql2: SSH username: vagrant
+    mysql2: SSH auth method: private key
+    mysql2: 
+    mysql2: Vagrant insecure key detected. Vagrant will automatically replace
+    mysql2: this with a newly generated keypair for better security.
+    mysql2: 
+    mysql2: Inserting generated public key within guest...
+    mysql2: Removing insecure key from the guest if it's present...
+    mysql2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> mysql2: Machine booted and ready!
+==> mysql2: Checking for guest additions in VM...
+    mysql2: No guest additions were detected on the base box for this VM! Guest
+    mysql2: additions are required for forwarded ports, shared folders, host only
+    mysql2: networking, and more. If SSH fails on this machine, please install
+    mysql2: the guest additions and repackage the box to continue.
+    mysql2: 
+    mysql2: This is not an error message; everything may continue to work properly,
+    mysql2: in which case you may ignore this message.
+==> mysql2: Setting hostname...
+==> mysql2: Configuring and enabling network interfaces...
+==> mysql2: Rsyncing folder: /root/prometheus-federation/ => /vagrant
+==> mysql2: Running provisioner: ansible_local...
+    mysql2: Installing Ansible...
+    mysql2: Running ansible-playbook...
+
+PLAY [mysql2] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mysql2]
+
+TASK [mysql2 : Update system] **************************************************
+changed: [mysql2]
+
+TASK [mysql2 : Add MySql  repository] ******************************************
+changed: [mysql2]
+
+TASK [mysql2 : Add Prometheus repository] **************************************
+changed: [mysql2]
+
+TASK [mysql2 : Installation Node_exporter] *************************************
+changed: [mysql2]
+
+TASK [mysql2 : Installation mysql and MySQL-python] ****************************
+changed: [mysql2]
+
+TASK [mysql2 : Starting services like node_exporter] ***************************
+changed: [mysql2] => (item=node_exporter)
+
+TASK [mysql2 : Starting service MYSQL] *****************************************
+changed: [mysql2] => (item=mysqld)
+
+TASK [mysql2 : capture password from mysql log] ********************************
+changed: [mysql2]
+
+TASK [mysql2 : debug] **********************************************************
+ok: [mysql2] => {
+    "msg": "haslo to  /<-olryTd0,,"
+}
+
+TASK [mysql2 : Set new password for user Root] *********************************
+changed: [mysql2]
+
+TASK [mysql2 : Copy sql.sh  file] **********************************************
+changed: [mysql2]
+
+TASK [mysql2 : Copy query.sql file] ********************************************
+changed: [mysql2]
+
+TASK [mysql2 : Copy table.sql file] ********************************************
+changed: [mysql2]
+
+TASK [mysql2 : Creating database and tables] ***********************************
+changed: [mysql2]
+
+TASK [mysql2 : Creating entry for mysql query] *********************************
+changed: [mysql2]
+
+TASK [mysql2 : Installation mysqld_exporter] ***********************************
+changed: [mysql2]
+
+TASK [mysql2 : Enable service mysqld_exporter] *********************************
+changed: [mysql2]
+
+TASK [mysql2 : Copy systemd service file for mysqld_exporter] ******************
+changed: [mysql2]
+
+TASK [mysql2 : Enable service mysqld_exporter] *********************************
+changed: [mysql2]
+
+TASK [mysql2 : Creating home directory] ****************************************
+changed: [mysql2]
+
+TASK [mysql2 : Add users] ******************************************************
+changed: [mysql2]
+
+TASK [mysql2 : Add albert to sudoers] ******************************************
+changed: [mysql2]
+
+TASK [mysql2 : Creating vagrant files directory] *******************************
+changed: [mysql2]
+
+RUNNING HANDLER [mysql2 : yum-clean-metadata] **********************************
+changed: [mysql2]
+
+PLAY RECAP *********************************************************************
+mysql2                     : ok=25   changed=23   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> prometheus2: Importing base box 'centos/7'...
+[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> prometheus2: Matching MAC address for NAT networking...
+==> prometheus2: Checking if box 'centos/7' version '2004.01' is up to date...
+==> prometheus2: Setting the name of the VM: Prometheus2
+==> prometheus2: Fixed port collision for 22 => 2222. Now on port 2202.
+==> prometheus2: Clearing any previously set network interfaces...
+==> prometheus2: Preparing network interfaces based on configuration...
+    prometheus2: Adapter 1: nat
+    prometheus2: Adapter 2: hostonly
+==> prometheus2: Forwarding ports...
+    prometheus2: 22 (guest) => 2202 (host) (adapter 1)
+==> prometheus2: Booting VM...
+==> prometheus2: Waiting for machine to boot. This may take a few minutes...
+    prometheus2: SSH address: 127.0.0.1:2202
+    prometheus2: SSH username: vagrant
+    prometheus2: SSH auth method: private key
+    prometheus2: 
+    prometheus2: Vagrant insecure key detected. Vagrant will automatically replace
+    prometheus2: this with a newly generated keypair for better security.
+    prometheus2: 
+    prometheus2: Inserting generated public key within guest...
+    prometheus2: Removing insecure key from the guest if it's present...
+    prometheus2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> prometheus2: Machine booted and ready!
+==> prometheus2: Checking for guest additions in VM...
+    prometheus2: No guest additions were detected on the base box for this VM! Guest
+    prometheus2: additions are required for forwarded ports, shared folders, host only
+    prometheus2: networking, and more. If SSH fails on this machine, please install
+    prometheus2: the guest additions and repackage the box to continue.
+    prometheus2: 
+    prometheus2: This is not an error message; everything may continue to work properly,
+    prometheus2: in which case you may ignore this message.
+==> prometheus2: Setting hostname...
+==> prometheus2: Configuring and enabling network interfaces...
+==> prometheus2: Rsyncing folder: /root/prometheus-federation/ => /vagrant
+==> prometheus2: Running provisioner: ansible_local...
+    prometheus2: Installing Ansible...
+    prometheus2: Running ansible-playbook...
+
+PLAY [prometheus2] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [prometheus2]
+
+TASK [prometheus2 : Update system] *********************************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Installation multiple packages] ****************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Add Prometheus repository] *********************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Add Grafana repository] ************************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Installation Prometheus, Node_expoerter, Grafana] **********
+changed: [prometheus2]
+
+TASK [prometheus2 : Inserting cofiguration for prometheus] *********************
+changed: [prometheus2]
+
+TASK [prometheus2 : Starting services Prometheus, node_exporter, grafana] ******
+[WARNING]: Both option path and its alias dest are set.
+changed: [prometheus2] => (item=prometheus)
+changed: [prometheus2] => (item=node_exporter)
+changed: [prometheus2] => (item=grafana-server)
+
+TASK [prometheus2 : Enabling ssh connection via passwd] ************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Creating home directory] ***********************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Add users] *************************************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Authorized keys] *******************************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Add albert to sudoers] *************************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Creating vagrant files directory] **************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Grafana - copy DATASOURCE YAML] ****************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Creating Grafana Dashboard Dir] ****************************
+changed: [prometheus2]
+
+TASK [prometheus2 : Grafana - dasboard Provisioning file] **********************
+changed: [prometheus2]
+
+TASK [prometheus2 : Grafana - copy MySql dashbord JSON file] *******************
+changed: [prometheus2]
+
+RUNNING HANDLER [prometheus2 : yum-clean-metadata] *****************************
+changed: [prometheus2]
+
+RUNNING HANDLER [prometheus2 : reload-ssh] *************************************
+changed: [prometheus2]
+
+RUNNING HANDLER [prometheus2 : reload-grafana] *********************************
+changed: [prometheus2]
+
+PLAY RECAP *********************************************************************
+prometheus2                : ok=21   changed=20   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+==> prometheus3: Importing base box 'centos/7'...
+[KProgress: 20%[KProgress: 40%[KProgress: 70%[KProgress: 90%[K==> prometheus3: Matching MAC address for NAT networking...
+==> prometheus3: Checking if box 'centos/7' version '2004.01' is up to date...
+==> prometheus3: Setting the name of the VM: Prometheus3
+==> prometheus3: Fixed port collision for 22 => 2222. Now on port 2203.
+==> prometheus3: Clearing any previously set network interfaces...
+==> prometheus3: Preparing network interfaces based on configuration...
+    prometheus3: Adapter 1: nat
+    prometheus3: Adapter 2: hostonly
+==> prometheus3: Forwarding ports...
+    prometheus3: 22 (guest) => 2203 (host) (adapter 1)
+==> prometheus3: Booting VM...
+==> prometheus3: Waiting for machine to boot. This may take a few minutes...
+    prometheus3: SSH address: 127.0.0.1:2203
+    prometheus3: SSH username: vagrant
+    prometheus3: SSH auth method: private key
+    prometheus3: 
+    prometheus3: Vagrant insecure key detected. Vagrant will automatically replace
+    prometheus3: this with a newly generated keypair for better security.
+    prometheus3: 
+    prometheus3: Inserting generated public key within guest...
+    prometheus3: Removing insecure key from the guest if it's present...
+    prometheus3: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> prometheus3: Machine booted and ready!
+==> prometheus3: Checking for guest additions in VM...
+    prometheus3: No guest additions were detected on the base box for this VM! Guest
+    prometheus3: additions are required for forwarded ports, shared folders, host only
+    prometheus3: networking, and more. If SSH fails on this machine, please install
+    prometheus3: the guest additions and repackage the box to continue.
+    prometheus3: 
+    prometheus3: This is not an error message; everything may continue to work properly,
+    prometheus3: in which case you may ignore this message.
+==> prometheus3: Setting hostname...
+==> prometheus3: Configuring and enabling network interfaces...
+==> prometheus3: Rsyncing folder: /root/prometheus-federation/ => /vagrant
+==> prometheus3: Running provisioner: ansible_local...
+    prometheus3: Installing Ansible...
+    prometheus3: Running ansible-playbook...
+
+PLAY [prometheus3] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [prometheus3]
+
+TASK [prometheus3 : Update system] *********************************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Installation multiple packages] ****************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Add Prometheus repository] *********************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Add Grafana repository] ************************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Installation Prometheus, Node_exporter, Grafana] ***********
+changed: [prometheus3]
+
+TASK [prometheus3 : Inserting cofiguration for prometheus] *********************
+changed: [prometheus3]
+
+TASK [prometheus3 : Starting services Prometheus, node_exporter, grafana] ******
+[WARNING]: Both option path and its alias dest are set.
+changed: [prometheus3] => (item=prometheus)
+changed: [prometheus3] => (item=node_exporter)
+changed: [prometheus3] => (item=grafana-server)
+
+TASK [prometheus3 : Enabling ssh connection via passwd] ************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Creating home directory] ***********************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Add users] *************************************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Authorized keys] *******************************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Add albert to sudoers] *************************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Creating vagrant files directory] **************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Grafana - copy DATASOURCE YAML] ****************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Creating Grafana Dashboard Dir] ****************************
+changed: [prometheus3]
+
+TASK [prometheus3 : Grafana - dasboard Provisioning file] **********************
+changed: [prometheus3]
+
+TASK [prometheus3 : Grafana - copy MySql dashbord JSON file] *******************
+changed: [prometheus3]
+
+RUNNING HANDLER [prometheus3 : yum-clean-metadata] *****************************
+changed: [prometheus3]
+
+RUNNING HANDLER [prometheus3 : reload-ssh] *************************************
+changed: [prometheus3]
+
+RUNNING HANDLER [prometheus3 : reload-grafana] *********************************
+changed: [prometheus3]
+
+PLAY RECAP *********************************************************************
+prometheus3                : ok=21   changed=20   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
